@@ -47,15 +47,19 @@ namespace WeatherAPIProject.Tests
         [Test]
         public void OpenWeatherMapListTempCompare()
         {
-            //compare Temp with Temp Max
+            //compare Temp with Temp min
             double temp = openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].main.temp;
-            double tempmax = openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].main.temp_max;
-            Assert.AreEqual(temp, tempmax);
+            double tempmin = openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].main.temp_min;
+            Assert.AreEqual(temp, tempmin);
         }
 
         [Test]
         public void OpenWeatherMapListTemp_Min()
         {
+            double kelvin = openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].main.temp_max;
+            double kelvin2 = 283.13099999999997;
+            Assert.That(kelvin2, Is.EqualTo(kelvin));
+
         }
 
         [Test]
@@ -70,6 +74,7 @@ namespace WeatherAPIProject.Tests
         [Test]
         public void OpenWeatherMapListGrnd_Level()
         {
+            Assert.GreaterOrEqual(openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].main.grnd_level, 1000);
         }
 
         [Test]
@@ -81,22 +86,33 @@ namespace WeatherAPIProject.Tests
         [Test]
         public void OpenWeatherMapListTemp_Kf()
         {
+            Assert.That(openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].main.temp_kf, Is.LessThan(0.0));
         }
 
         [Test]
         public void OpenWeatherMapListWeatherID()
         {
-            //list for ID rain 
-            var id = new List<int>();
-            id.AddRange(new[] { 500, 501, 502, 503, 504, 511, 520, 521, 522, 531 });
+            //list for ID for weather
+            var rain = new List<int>();
+            //list for rain id
+            rain.AddRange(new[] { 500, 501, 502, 503, 504, 511, 520, 521, 522, 531 });
+            //list for cloud id
+            rain.AddRange(new[] { 801, 802, 803, 804 });
+            //list for thunder id
+            rain.AddRange(new[] { 200, 201, 202, 201, 211, 212, 221, 230, 231, 232 });
+            //list for clear 
+            rain.AddRange(new[] { 800 }); 
+            //list for drizzle, snow, atmposhere
 
-            Assert.Contains(openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].weather[0].id, id);
+            Assert.Contains(openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].weather[0].id, rain);
         }
 
         [Test]
         public void OpenWeatherMapListWeatherName()
         {
-            Assert.AreEqual("Rain", openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].weather[0].main);
+            var rainname = new List<string>();
+            rainname.AddRange(new[] { "Clouds", "Clear", "Rain", "Atmosphere", "Snow", "Drizzle", "ThunderStorm" });
+            Assert.Contains(openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].weather[0].main, rainname);
         }
 
         [Test]
@@ -126,6 +142,7 @@ namespace WeatherAPIProject.Tests
         [Test]
         public void OpenWeatherMapListSys()
         {
+
             Assert.AreEqual(1, openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.list[0].sys.pod.Length);
         }
 
@@ -152,7 +169,10 @@ namespace WeatherAPIProject.Tests
 
         [Test]
         public void OpenWeatherMapCityTimezone()
-        {  
+        {
+            var offset = TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow).TotalSeconds;
+            int timezone = openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.city.timezone;
+            Assert.That(offset, Is.EqualTo(timezone));
         }
 
         [Test]
@@ -180,7 +200,7 @@ namespace WeatherAPIProject.Tests
         public void OpenWeatherMapCityPopulation()
         {
             //test if population is not empty
-            Assert.IsNotNull(openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.city.sunrise);
+            Assert.IsNotNull(openWeatherMapForcast.openWeatherMapDTO.openWeatherMap.city.population);
         }
 
         [Test]
