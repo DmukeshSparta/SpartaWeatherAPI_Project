@@ -13,12 +13,12 @@ namespace WeatherAPIProject.OpenWeatherMap_Forecast.HTTP_Manager
 
         public OpenWeatherMapCallManager()
         {
-            client = new RestClient(WeatherConfig.baseUrl);
+            client = new RestClient(OpenWeatherMapConfig.baseUrl);
         }
 
-        public string GetLatestWeatherReport()
+        public string GetOpenWeatherMap()
         {
-            var request = new RestRequest("/latest" + WeatherConfig.ApiUrlMod + WeatherConfig.ApiKey);
+            var request = new RestRequest(OpenWeatherMapConfig.ApiCity + "&" + OpenWeatherMapConfig.ApiKey);
             var response = client.Execute(request, Method.GET);
             return response.Content;
         }

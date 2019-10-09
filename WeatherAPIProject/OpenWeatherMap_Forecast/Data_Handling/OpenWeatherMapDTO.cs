@@ -9,10 +9,10 @@ namespace WeatherAPIProject.OpenWeatherMap_Forecast.Data_Handling
 {
     class OpenWeatherMapDTO
     {
-        public LatestWeather latestWeather { get; set; }
-        public void DeserializeLatestWeatherReport(String LatestRateResponse)
+        public OpenWeatherMapRoot openWeatherMap { get; set; }
+        public void DeserializeOpenWeatherMap(String OpenWeatherMapResponse)
         {
-            latestWeather = JsonConvert.DeserializeObject<LatestWeather>(LatestRateResponse);
+            openWeatherMap = JsonConvert.DeserializeObject<OpenWeatherMapRoot>(OpenWeatherMapResponse);
         }
     }
 }

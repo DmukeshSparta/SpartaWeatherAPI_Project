@@ -7,10 +7,10 @@ using System.Configuration;
 
 namespace WeatherAPIProject
 {
-    class WeatherConfig
+    class OpenWeatherMapConfig
     {
         public static readonly String baseUrl = ConfigurationManager.AppSettings["base_url"];
         public static readonly String ApiKey = ConfigurationManager.AppSettings["api_key"];
-        public static readonly String ApiUrlMod = ConfigurationManager.AppSettings["access_key_url_mod"];
+        public static readonly String ApiCity = ConfigurationManager.AppSettings["api_city"];
     }
 }

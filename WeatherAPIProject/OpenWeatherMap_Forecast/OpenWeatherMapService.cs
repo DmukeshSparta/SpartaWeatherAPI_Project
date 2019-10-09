@@ -12,26 +12,16 @@ namespace WeatherAPIProject.OpenWeatherMap_Forecast
     class OpenWeatherMapService
     {
         //we need DTO
-        public OpenWeatherMapDTO latestDTO = new OpenWeatherMapDTO();
+        public OpenWeatherMapDTO openWeatherMapDTO = new OpenWeatherMapDTO();
         //We need Call Manager
-        public OpenWeatherMapCallManager latestCallManager = new OpenWeatherMapCallManager();
+        public OpenWeatherMapCallManager openWeatherMapCall = new OpenWeatherMapCallManager();
         //Json Object 
-        public JObject latestRatesJson;
+        public JObject OpenWeatherMapJson;
 
         public OpenWeatherMapService()
         {
-            latestDTO.DeserializeLatestWeatherReport(latestCallManager.GetLatestWeatherReport());
-            latestRatesJson = JObject.Parse(latestCallManager.GetLatestWeatherReport());
-        }
-
-        public int GetTotalRates()
-        {
-            int count = 0;
-            foreach (var item in latestRatesJson["rates"])
-            {
-                count += 1;
-            }
-            return count;
+            openWeatherMapDTO.DeserializeOpenWeatherMap(openWeatherMapCall.GetOpenWeatherMap());
+            OpenWeatherMapJson = JObject.Parse(openWeatherMapCall.GetOpenWeatherMap());
         }
     }
 }
