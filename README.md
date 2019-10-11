@@ -51,7 +51,8 @@ Step by Step for running the tests:
 * Click on View -> Solution Explorer or to view the Solution Explorer
 * Right click on the solution to Restore NuGuet Packges
 * Click on Test -> Windows -> Test Explorer to view the test window
-* Click on the run all button to run all the  tests or run selected button to specific selected tests in the Test Explorer
+* Click on the run all button to run all the tests or run selected button to specific selected tests in the Test Explorer
+* Below show the example of tests. 
 
 one of example of running the tests to check the ID for the rain. On Postman, Rain ID was 501 and this test will check all the 
 rain ID through the list, if the ID matches then it will pass the test but if the ID doesn't match then test fails.
